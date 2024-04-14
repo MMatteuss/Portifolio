@@ -103,6 +103,11 @@ footer{
 }
 .lefti{
     width: 350px;
+    margin-top: 1%;
+}
+.righti{
+    width: 350px;
+    margin-top: 1%;
 }
 .center{
     margin-top: 15px;
