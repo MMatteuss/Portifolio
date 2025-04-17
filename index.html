@@ -1,187 +1,1101 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-<head>  
-    <!-- O atributo rel define a relação entre sua página e o URL vinculado. Configurá-lo como noopener noreferrer evita um tipo de phishing conhecido como 'tabnabbing'. -->
+<html lang="pt-BR">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>portifólio</title>
+    <title>Matteus Monteiro | Desenvolvedor Full Stack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #e63946; /* Vermelho vibrante */
+            --secondary: #1d3557; /* Azul escuro */
+            --accent: #a8dadc; /* Azul claro */
+            --dark: #121212; /* Preto */
+            --light: #f1faee; /* Branco suave */
+            --text: #333;
+            --rock-red: #8b0000;
+            --rock-blue: #00008b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                linear-gradient(rgba(18, 18, 18, 0.9), rgba(18, 18, 18, 0.9)),
+                url('https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        @keyframes rockGuitar {
+            0% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+            100% { transform: rotate(-5deg); }
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary) }
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--primary);
+            margin-left: 0.5rem;
+        }
+        
+        .logo .rock-icon {
+            margin-left: 1rem;
+            font-size: 1.5rem;
+            color: var(--rock-red);
+            animation: rockGuitar 2s infinite;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 2rem;
+        }
+        
+        nav ul li a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--light);
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(230,57,70,0.1) 0%, rgba(18,18,18,0.9) 70%);
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 3rem;
+        }
+        
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            background: linear-gradient(90deg, var(--primary), var(--rock-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .hero-text h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .typing-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret 0.75s step-end infinite;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            position: relative;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+        
+        .profile-image {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            transition: all 0.5s ease;
+            border: 5px solid var(--primary);
+        }
+        
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 60px rgba(230, 57, 70, 0.3);
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .tech-item {
+            background-color: rgba(29, 53, 87, 0.5);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        /* About Section */
+        .about {
+            padding: 5rem 2rem;
+            background-color: rgba(29, 53, 87, 0.1);
+            backdrop-filter: blur(5px);
+        }
+        
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--light);
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: var(--primary);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .about-text h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+        
+        .code-icon {
+            font-size: 10rem;
+            color: var(--primary);
+            opacity: 0.7;
+        }
+        
+        /* Skills Section */
+        .skills {
+            padding: 5rem 2rem;
+            background-color: rgba(18, 18, 18, 0.8);
+        }
+        
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .skill-category {
+            background-color: rgba(29, 53, 87, 0.3);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(168, 218, 220, 0.1);
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .skill-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(230, 57, 70, 0.1);
+            border-color: var(--primary);
+        }
+        
+        .skill-category h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .skill-category h3 i {
+            margin-right: 10px;
+        }
+        
+        .skill-list {
+            list-style: none;
+        }
+        
+        .skill-list li {
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        
+        /* Languages Section */
+        .languages {
+            padding: 5rem 2rem;
+            background-color: rgba(230, 57, 70, 0.05);
+        }
+        
+        .language-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+            justify-content: center;
+        }
+        
+        .language-item {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            background-color: rgba(29, 53, 87, 0.3);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .language-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(230, 57, 70, 0.2);
+        }
+        
+        .language-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        .language-bar {
+            height: 10px;
+            background-color: rgba(168, 218, 220, 0.2);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .language-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--rock-blue));
+            border-radius: 5px;
+        }
+        
+        /* Projects Section */
+        .projects {
+            padding: 5rem 2rem;
+            background-color: rgba(18, 18, 18, 0.9);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .project-card {
+            background-color: rgba(29, 53, 87, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-out;
+            border: 1px solid rgba(168, 218, 220, 0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(230, 57, 70, 0.2);
+            border-color: var(--primary);
+        }
+        
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-content h3 {
+            color: var(--light);
+            margin-bottom: 0.5rem;
+        }
+        
+        .project-content p {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .project-tech span {
+            background-color: rgba(230, 57, 70, 0.2);
+            color: var(--light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-links a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .project-links a:first-child {
+            background-color: var(--primary);
+        }
+        
+        .project-links a:last-child {
+            background-color: transparent;
+            border: 1px solid var(--light);
+        }
+        
+        .project-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, rgba(230,57,70,0.1), rgba(29,53,87,0.3));
+            backdrop-filter: blur(5px);
+        }
+        
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .contact-form {
+            margin-top: 3rem;
+            animation: fadeIn 1s ease-out;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background-color: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 5px;
+            color: var(--light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.3);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary), var(--rock-red));
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--light);
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo span {
+            color: var(--primary);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-links a {
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-social a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            color: var(--accent);
+            font-size: 0.9rem;
+        }
+        
+        .rock-quote {
+            margin-top: 2rem;
+            font-style: italic;
+            color: var(--accent);
+            position: relative;
+        }
+        
+        .rock-quote::before,
+        .rock-quote::after {
+            content: '"';
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 0 1rem;
+            }
+            
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: rgba(18, 18, 18, 0.95);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+                z-index: 999;
+            }
+            
+            nav ul.show {
+                display: flex;
+            }
+            
+            nav ul li {
+                margin: 0;
+                padding: 0.8rem 2rem;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .hero {
+                padding: 8rem 1rem 4rem;
+                text-align: center;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-text h2 {
+                font-size: 1.2rem;
+            }
+            
+            .social-links {
+                justify-content: center;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .typing-text {
+                white-space: normal;
+                animation: none;
+                border-right: none;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .language-item {
+                min-width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <nav>
-            <div class="container">
-                <div class="esquerda02">
-                    <h1><a href="https://github.com/MMatteuss" target="_blank">Yale</a></h1>
-                </div>    
-                <div class="direita02">
-                    <ul>
-                        <li><a href="#sobremim">Sobre mim</a></li>
-                        <li><a href="#contato">contato</a></li>
-                        <li><a href="#habilidade">Habilidades</a></li>
-                        <li><a href="#projeto">Projetos</a></li>
+        <div class="header-container">
+            <div class="logo">
+                <span>M</span>Matteus
+                <i class="fas fa-guitar rock-icon"></i>
+            </div>
+            <nav>
+                <div class="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#about">Sobre</a></li>
+                    <li><a href="#skills">Habilidades</a></li>
+                    <li><a href="#projects">Projetos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Matteus Monteiro</h1>
+                <h2>Desenvolvedor Full Stack</h2>
+                <div class="typing-text">
+                    Apaixonado por desenvolvimento web, back-end e reparo de computadores
+                </div>
+                <div class="tech-stack">
+                    <span class="tech-item">Java</span>
+                    <span class="tech-item">Python</span>
+                    <span class="tech-item">Kotlin</span>
+                    <span class="tech-item">JavaScript</span>
+                    <span class="tech-item">HTML/CSS</span>
+                    <span class="tech-item">Flask</span>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/Mmatteuss" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://avatars.githubusercontent.com/u/SEU_USER_ID?v=4" alt="Matteus Monteiro" class="profile-image">
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Sobre Mim</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Oíeee! 👋</h3>
+                    <p>
+                        Sou Matteus Monteiro, estudante de Desenvolvimento de Sistemas no SENAC (2º período EAD, Java) atualmente pausado. 
+                        Tenho experiência em C#, Kotlin, Java, Python e JavaScript, e sou apaixonado por desenvolvimento web e back-end, 
+                        explorando tecnologias como Flask, HTML5 e CSS3.
+                    </p>
+                    <p>
+                        Além disso, possuo conhecimentos em PostgreSQL e MySQL, e sou entusiasta de reparo de computadores. 
+                        Estou embarcando em minha jornada como desenvolvedor e ansioso para aprender e criar soluções inovadoras.
+                    </p>
+                    <p>
+                        Quando não estou codando, você pode me encontrar ouvindo rock clássico, consertando hardware ou explorando novas tecnologias.
+                    </p>
+                </div>
+                <div class="about-image">
+                    <i class="fas fa-code code-icon"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="skills" id="skills">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Minhas Habilidades</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3><i class="fas fa-laptop-code"></i> Front-end</h3>
+                    <ul class="skill-list">
+                        <li>HTML5</li>
+                        <li>CSS3</li>
+                        <li>JavaScript</li>
+                        <li>Responsive Design</li>
+                        <li>Bootstrap</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-server"></i> Back-end</h3>
+                    <ul class="skill-list">
+                        <li>Java</li>
+                        <li>Python</li>
+                        <li>Flask</li>
+                        <li>C#</li>
+                        <li>Kotlin</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-database"></i> Bancos de Dados</h3>
+                    <ul class="skill-list">
+                        <li>PostgreSQL</li>
+                        <li>MySQL</li>
+                        <li>SQL Basics</li>
+                    </ul>
+                </div>
+                <div class="skill-category">
+                    <h3><i class="fas fa-tools"></i> Ferramentas</h3>
+                    <ul class="skill-list">
+                        <li>Visual Studio Code</li>
+                        <li>PyCharm</li>
+                        <li>IntelliJ IDEA</li>
+                        <li>Android Studio</li>
+                        <li>Git/GitHub</li>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-    <main>
-        <div class="conteudo">
-            <div class="foto">
-                <!-- FOTO -->
-            </div>
-            <h2 id="sobremim">Sobre mim:</h2>
-            <p>
-                Sou estudante de Desenvolvimento de Sistemas, atualmente cursando Técnico em Desenvolvimento de Sistemas no SENAC (2° período EAD). Tenho experiência com linguagens como <b>C#, Kotlin, Java, Python e JavaScript</b>, e sou apaixonado por desenvolvimento web e back-end, com conhecimentos em <b>Flask, HTML5, e CSS3</b>. Além disso, possuo habilidades em <b>PostgreSQL e MySQL</b>, e sou um entusiasta de reparo de computadores.
-            </p>
-            <h2 id="contato">Contatos:</h2>
-            <p>
-                Você pode entrar em contato através do meu telefone ou E-mail. <br>
-                <!-- Telefone: (82) 9375-2194 <br> -->
-                Email: <a href="mailto:MateusAraujoMonteiro5710@gmail.com?subject=Gostei%20muito%20do%20seu%20portif%C3%B3lio" style="color: rgb(134, 134, 255); margin-left: 10px;">MateusAraujoMonteiro5710@gmail.com</a> <br>
-                <div class="iconCont">
-                    <a href="https://www.instagram.com/mateusrllk/" target="_blank" rel="noopener noreferrer">
-                        <img src="icones/icons8-instagram.svg" alt="Meu instagram">
-                    </a>
-                    <a href="https://GitHub.com/MMatteuss" target="_blank" rel="noopener noreferrer">
-                        <img src="icones/icons8-github-50.svg" alt="meu GitHub">
-                    </a>
-                    <!-- <a href="https://wa.me/558293702194" target="_blank" rel="noopener noreferrer">
-                        <img src="icones/icons8-whatsapp-50.svg" alt="meu zap">
-                    </a> -->
-                </div>
-            </p>
-            <br>
-            <h2 id="habilidade">Habilidades:</h2>
-            <div class="hablidades">
-                <p>
-                    <h6>Pilha principal:</h6><br>
-                    <div class="icons">
-                        &nbsp <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-                        &nbsp <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-                        &nbsp <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white">
-                        &nbsp <img src="https://img.shields.io/badge/Python-14354C?style=for-the-badge&logo=python&logoColor=white">
-                        &nbsp <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E">
-                        &nbsp <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white">
-                    </div>
-                    <br><h6>Estudando neste momento:</h6><br>
-                    <div class="icons">
-                        &nbsp<img src="https://img.shields.io/badge/C_Sharp-7c118f?style=for-the-badge&logo=CSharp&logoColor=white" alt="C#">
-                        &nbsp<img src="https://img.shields.io/badge/Kotlin-0095D5?&style=for-the-badge&logo=kotlin&logoColor=white" alt="Kotlin">
-                        &nbsp<img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
-                    </div>
+        </div>
+    </section>
 
-                    <br><h6>Ferramentas de trabalho:</h6><br>
-                    <div class="icons">
-                        &nbsp<img src="https://img.shields.io/badge/Android%20Studio-3DDC84.svg?style=for-the-badge&logo=android-studio&logoColor=white" alt="Android Studios">
-                        &nbsp<img src="https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white" alt="intellij-idea">
-                        &nbsp<img src="https://img.shields.io/badge/pycharm-143?style=for-the-badge&logo=pycharm&logoColor=black&color=black&labelColor=green" alt="PyCharm">
-                        &nbsp<img src="https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white" alt="Visual Studio Code">
-                        &nbsp<img src="https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-                        &nbsp<img src="https://img.shields.io/badge/Trello-%23026AA7.svg?style=for-the-badge&logo=Trello&logoColor=white" alt="Trello">
-                    </div>
-                    
-                    <br><h6>Bancos de dados:</h6> <br>
-                    <div class="icons">
-                        &nbsp<img src="https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white" alt="PostgreSql">
-                        &nbsp<img src="https://img.shields.io/badge/mySql-323330?style=for-the-badge&logo=mysql&logoColor=blue" alt="MySQL">
-                    </div>
-                </p>
+    <section class="languages" id="languages">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Linguagens Mais Usadas</h2>
             </div>
-            <br>
-            <h2 id="projeto">Projetos:</h2>
-            <p>
-                <div class="projetos">
-                    <details>
-                        <summary>SENAC - Projeto jovem aprendiz - 26/09/2023</summary>
-                        <p>[<a href="https://github.com/MMatteuss/Projeto-Jovem-Aprendiz-SENAC-26-09-2023" target="_blank" rel="noopener noreferrer">LINK DO PROJETO</a>]
-                            - Esse foi um projeto para o SENAC, que a problemática era os alunos do jovem
-                            aprendiz, que não tinha um site próprio do SENAC para conseguir um emprego. Sabendo disso.
-                            Minha turma de Programação WEB, nós pensamos em fazer esse projeto. Fiquei
-                            com o Back-end, Front-end e Banco de dados. A principal linguagem de Programação era 
-                            <b>Python</b> e o framework usado foi o <b>Flask</b>, e as linguagens de marcação usadas
-                            Foram o <b>HTML5</b> e <b>CSS3</b> usando o ⁣<b>Bootstrap⁣.</b> Eu
-                            fiquei responsável por fazer a tela e o back-end de <a href="https://github.com/MMatteuss/Projeto-Jovem-Aprendiz-SENAC-26-09-2023/blob/main/arquivos/templates/grid.html" target="_blank" rel="noopener noreferrer">
-                            GRID</a> para o SENAC que serve para ver o total de alunos cadastrados e também ver os dados,
-                            como nome, data de nascimento, CPF e etc. Fiz o 
-                            cadastramento dos alunos no <a href="https://github.com/MMatteuss/Projeto-Jovem-Aprendiz-SENAC-26-09-2023/tree/main/Banco%20de%20dados" target="_blank" rel="noopener noreferrer">banco de dados</a>
-                            e fiz o back-end da 
-                            <a href="https://github.com/MMatteuss/Projeto-Jovem-Aprendiz-SENAC-26-09-2023/blob/main/arquivos/templates/cadastroaluno.html" target="_blank" rel="noopener noreferrer">filtragem de alunos</a>,
-                            tanto a busca pelo nome do aluno e também da sua área profissional, ajudei bastante na ideia do projeto e no trello
-                            para levantamentos de requisitos.
-                        </p>
-                    </details>
-                    <details>
-                        <summary>Bot Discord em Python - 14/02/2024</summary>
-                        <p>[<a href="https://github.com/MMatteuss/Bot-Discord-em-Python" target="_blank" rel="noopener noreferrer">LINK DO PROJETO</a>] - 
-                        Um projeto de um bot do Discord usando <b>Python</b>, eu estou
-                        ainda terminando ele, ele vai ser um Bot de música,
-                            usando a importe do Spotify.
-                        </p>
-                    </details>
-                    
-                    <details>
-                        <summary>Desafio Filipão - Dio</summary>
-                        <p>[<a href="https://github.com/MMatteuss/desafio-felipao" target="_blank" rel="noopener noreferrer">LINK DO PROJETO</LINk></a>]
-                        Foi um desafio do Bootcamp da <a href="https://www.dio.me/" target="_blank" rel="noopener noreferrer">dio.me</a>,
-                        chamado de Potência Tech iFood - Programação do Zero. Foi usado <b>JavaScript</b>.
-                        </p>
-                    </details>
-                    
-                    <details>
-                        <summary>Atividades em Kotlin</summary>
-                        <p>[<a href="https://github.com/MMatteuss/Atividades-em-Kotlin" target="_blank" rel="noopener noreferrer">LINK DO PROJETO</LINk></a>]
-                        - Aqui são 100 atividades de lógica de programação usando a linguagem
-                        <b>Kotlin</b>, aprendendo "SEQUÊNCIAS BÁSICAS, CONDIÇÕES BÁSICAS,
-                        CONDIÇÕES COMPOSTAS, REPETIÇÕES ENQUANTO, ENQUANTO COM FLAG, REPETIÇÃO COM FAÇA ENQUANTO,
-                        REPETIÇÃO COM PARA, VETORES, PROCEDIMENTOS e FUNÇÕES"
-                        </p>
-                    </details>
-                    
-                    <details>
-                        <summary>Curso de Java - cursoemvideo</summary>
-                        <p>[<a href="https://github.com/MMatteuss/Java-Basico-cursoemvideo" target="_blank" rel="noopener noreferrer">LINK DO PROJETO</LINk></a>]
-                        Algumas atividades do curso de <b>Java</b> do <a href="">curso em vídeo</a>, usando a IDE
-                        NetBeans
-                        </p>
-                    </details>
-                    
-                    <details>
-                        <summary>Desafio de Projeto - Dio</summary>
-                        <p>[<a href="https://github.com/MMatteuss/aprenda-kotlin-com-exemplos-lab" target="_blank" rel="noopener noreferrer">LINK DO PROJETO</LINk></a>]
-                        - Desafio da Dio.me usando <b>Kotlin</b>, O desafio é otimizar a administração das formações educacionais
-                        da DIO para profissionais de TI, abrangendo a organização dos cursos, desde a definição de nomes, níveis
-                        e conteúdos, até a eficácia no processo de matrícula dos alunos. O objetivo é assegurar que essas formações
-                            atendam às demandas do mercado de trabalho em TI, proporcionando uma experiência educacional de excelência.
-                        </p>
-                    </details>
+            <div class="language-stats">
+                <div class="language-item">
+                    <div class="language-name">
+                        <span>HTML</span>
+                        <span>49.28%</span>
+                    </div>
+                    <div class="language-bar">
+                        <div class="language-progress" style="width: 49.28%"></div>
+                    </div>
                 </div>
-            </p>
-            <br>
+                <div class="language-item">
+                    <div class="language-name">
+                        <span>Java</span>
+                        <span>17.31%</span>
+                    </div>
+                    <div class="language-bar">
+                        <div class="language-progress" style="width: 17.31%"></div>
+                    </div>
+                </div>
+                <div class="language-item">
+                    <div class="language-name">
+                        <span>Python</span>
+                        <span>14.26%</span>
+                    </div>
+                    <div class="language-bar">
+                        <div class="language-progress" style="width: 14.26%"></div>
+                    </div>
+                </div>
+                <div class="language-item">
+                    <div class="language-name">
+                        <span>Kotlin</span>
+                        <span>7.75%</span>
+                    </div>
+                    <div class="language-bar">
+                        <div class="language-progress" style="width: 7.75%"></div>
+                    </div>
+                </div>
+                <div class="language-item">
+                    <div class="language-name">
+                        <span>CSS</span>
+                        <span>7.35%</span>
+                    </div>
+                    <div class="language-bar">
+                        <div class="language-progress" style="width: 7.35%"></div>
+                    </div>
+                </div>
+                <div class="language-item">
+                    <div class="language-name">
+                        <span>JavaScript</span>
+                        <span>4.05%</span>
+                    </div>
+                    <div class="language-bar">
+                        <div class="language-progress" style="width: 4.05%"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="section-container">
+            <div class="section-title">
+                <h2>Projetos Destacados</h2>
+            </div>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Projeto 1">
+                    </div>
+                    <div class="project-content">
+                        <h3>Sistema de Gerenciamento</h3>
+                        <p>Um sistema completo desenvolvido em Java para gerenciamento de estoque e vendas.</p>
+                        <div class="project-tech">
+                            <span>Java</span>
+                            <span>MySQL</span>
+                            <span>Swing</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> Código</a>
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Projeto 2">
+                    </div>
+                    <div class="project-content">
+                        <h3>Aplicativo Android</h3>
+                        <p>Aplicativo desenvolvido em Kotlin para gerenciamento de tarefas pessoais.</p>
+                        <div class="project-tech">
+                            <span>Kotlin</span>
+                            <span>Android</span>
+                            <span>Room</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> Código</a>
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" alt="Projeto 3">
+                    </div>
+                    <div class="project-content">
+                        <h3>Site Pessoal</h3>
+                        <p>Portfólio pessoal desenvolvido com HTML, CSS e JavaScript.</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#"><i class="fab fa-github"></i> Código</a>
+                            <a href="#"><i class="fas fa-external-link-alt"></i> Demo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="contact-container">
+            <div class="section-title">
+                <h2>Vamos Conversar</h2>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nome</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Assunto</label>
+                    <input type="text" id="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem</label>
+                    <textarea id="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>
+
     <footer>
-        <div class="container">
-            <div class="esquerda">
-                <h1><a href="https://github.com/MMatteuss">Mateus Monteiro</a></h1>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span>M</span>Matteus
             </div>
-            <div class="centro">
-                <p>2024 Feito por Mateus Monteiro</p>
+            <div class="footer-links">
+                <a href="#home">Início</a>
+                <a href="#about">Sobre</a>
+                <a href="#skills">Habilidades</a>
+                <a href="#projects">Projetos</a>
+                <a href="#contact">Contato</a>
             </div>
-            <div class="direita">
-                <div class="icon">
-                    <a href="https://www.instagram.com/mateusrllk/" target="_blank" rel="noopener noreferrer">
-                        <img src="icones/icons8-instagram.svg" alt="Meu instagram">
-                    </a>
-                    <a href="https://GitHub.com/MMatteuss" target="_blank" rel="noopener noreferrer">
-                        <img src="icones/icons8-github-50.svg" alt="meu GitHub">
-                    <!-- </a>
-                    <a href="https://wa.me/558293702194" target="_blank" rel="noopener noreferrer">
-                        <img src="icones/icons8-whatsapp-50.svg" alt="meu zap">
-                    </a> -->
-                </div>
+            <div class="footer-social">
+                <a href="https://github.com/Mmatteuss" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
             </div>
-        </div>
-    </footer>
-</body>
-</html>
+            <div class="rock-quote
