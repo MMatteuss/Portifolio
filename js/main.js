@@ -13,3 +13,18 @@ document.getElementById('myForm').addEventListener('submit', function(event) {
 
     window.open(whatsappURL, '_blank');
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const loadMoreBtn = document.getElementById('load-more-projects');
+    const additionalProjects = document.querySelector('.additional-projects');
+    
+    loadMoreBtn.addEventListener('click', function() {
+        if (additionalProjects.style.display === 'none' || additionalProjects.style.display === '') {
+            additionalProjects.style.display = 'grid'; // ou 'flex' dependendo do seu layout
+            loadMoreBtn.textContent = 'Mostrar menos';
+        } else {
+            additionalProjects.style.display = 'none';
+            loadMoreBtn.textContent = 'Ver mais projetos';
+        }
+    });
+});
